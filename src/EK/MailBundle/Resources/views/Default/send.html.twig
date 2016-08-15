@@ -1,0 +1,24 @@
+{% extends "::base.html.twig" %}
+{% block js %}
+    {{ parent() }}
+    <script type='text/javascript' src="{{ asset('js/sending.js') }}"></script>
+{% endblock %}
+
+{% block mainContent %}
+    <div id="camp">{{ campagne.id }}</div><br>
+    Number of emails sent : <div id="numSent">{{ campagne.numSent }}</div><br>
+    Number of emails left : <div id="numNoSent">{{ campagne.numNoSent }}</div><br>
+
+    {% if campagne.pause == false and campagne.numNoSent !=0 %}
+    <button class="disabled" id="send">Send</button>
+    <button class="stop" id="stop">Stop</button>
+    {% elseif campagne.pause == true and campagne.numNoSent !=0 %}
+    <button class="send" id="send">Send</button>
+    <button class="disabled" id="stop">Stop</button>
+    {% elseif campagne.numNoSent == 0 %}
+    <button class="disabled">Send</button>
+    <button class="disabled">Stop</button>
+    {% endif %}
+    <button class="actualiser" id="actualiser">Actualiser</button>
+    <a href="{{ path("test_campagne", {id: campagne.id}) }}" class="" id="myBtn">Test</a>
+{% endblock %}

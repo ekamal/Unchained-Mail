@@ -1,0 +1,19 @@
+{% extends "::base.html.twig" %}
+
+{% block mainContent %}
+
+    <span class="contentBody">
+        {% for ip in ips %}
+
+            <span class="spanParent">
+
+
+            <span class="nomElement">{{ ip.ip }}</span>
+            <a class="supprimerIp" id="{{ ip.id }}" href="javascript:;">Supprimer</a>
+            </span>
+
+
+        {% endfor %}
+    </span>
+
+{% endblock %}

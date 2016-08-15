@@ -1,0 +1,19 @@
+{% extends "::base.html.twig" %}
+
+{% block mainContent %}
+
+    <span class="contentBody">
+        {% for data in datas %}
+
+            <span class="spanParent">
+
+
+            <span class="nomElement">{{ data.nomData }}</span>
+            <a class="supprimerData" id="{{ data.id }}" href="javascript:;">Supprimer</a>
+            </span>
+
+
+        {% endfor %}
+    </span>
+
+{% endblock %}

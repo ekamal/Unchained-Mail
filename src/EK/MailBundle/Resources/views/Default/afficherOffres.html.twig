@@ -1,0 +1,29 @@
+{% extends "::base.html.twig" %}
+
+{% block mainContent %}
+
+    <span class="contentBody">
+        {% for offre in offres %}
+
+        <span class="spanParent">
+
+
+            <span class="nomElement">{{ offre.nomOffre }}</span>
+            <a href="{{ path("modifier_offre", {id: offre.id}) }}" class="actionElement">Modifier</a>
+            <a class="supprimerOffre" id="{{ offre.id }}" href="javascript:;">Supprimer</a>
+
+            {% if offre.etat == true %}
+                <a class="etatElement" id="{{ offre.id }}" href="javascript:;">Desactiver</a>
+            {% else %}
+                <a class="etatElement" id="{{ offre.id }}" href="javascript:;" style="color: #ff0000;">Activer</a>
+            {% endif %}
+
+
+
+        </span>
+
+
+        {% endfor %}
+    </span>
+
+{% endblock %}

@@ -1,0 +1,3 @@
+203.145.120.20,host2,user22,pass22
+139.59.155.41,mail.server1.com,kira,speedy15$
+139.59.138.224,mail.server2.com,kira,speedy15$

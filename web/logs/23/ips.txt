@@ -1,0 +1,2 @@
+139.59.211.0,mail.server.com,kira,speedy15$
+46.101.241.164,mail.server.com,kira,speedy15$

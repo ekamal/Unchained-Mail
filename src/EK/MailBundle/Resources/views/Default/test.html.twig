@@ -1,0 +1,27 @@
+{% extends "::base.html.twig" %}
+
+{% block mainContent %}
+
+    <span class="contentBody">
+
+
+        {% for hes in hess %}
+
+            {{ hes }}<br>
+
+        {% endfor %}
+
+    <br><br> Xheader : <br>
+
+        {% for xheader in xheaders %}
+
+        {{ xheader }}<br>
+
+        {% endfor %}
+
+    HTML: <br>
+
+    {{ html }}
+
+
+{% endblock %}

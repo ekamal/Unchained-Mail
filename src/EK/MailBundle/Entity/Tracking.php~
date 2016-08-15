@@ -1,0 +1,124 @@
+<?php
+
+namespace EK\MailBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Tracking
+ *
+ * @ORM\Table(name="tracking")
+ * @ORM\Entity(repositoryClass="EK\MailBundle\Repository\TrackingRepository")
+ */
+class Tracking
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="click", type="integer")
+     */
+    private $click;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="open", type="integer")
+     */
+    private $open;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="unsub", type="integer")
+     */
+    private $unsub;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set click
+     *
+     * @param integer $click
+     * @return Tracking
+     */
+    public function setClick($click)
+    {
+        $this->click = $click;
+
+        return $this;
+    }
+
+    /**
+     * Get click
+     *
+     * @return integer 
+     */
+    public function getClick()
+    {
+        return $this->click;
+    }
+
+    /**
+     * Set open
+     *
+     * @param integer $open
+     * @return Tracking
+     */
+    public function setOpen($open)
+    {
+        $this->open = $open;
+
+        return $this;
+    }
+
+    /**
+     * Get open
+     *
+     * @return integer 
+     */
+    public function getOpen()
+    {
+        return $this->open;
+    }
+
+    /**
+     * Set unsub
+     *
+     * @param integer $unsub
+     * @return Tracking
+     */
+    public function setUnsub($unsub)
+    {
+        $this->unsub = $unsub;
+
+        return $this;
+    }
+
+    /**
+     * Get unsub
+     *
+     * @return integer 
+     */
+    public function getUnsub()
+    {
+        return $this->unsub;
+    }
+}

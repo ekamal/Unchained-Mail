@@ -1,0 +1,188 @@
+index:
+    path:     /
+    defaults: { _controller: MailBundle:Default:index }
+
+ajouter_ip:
+    pattern: /ajouterIp
+    defaults: { _controller: MailBundle:Default:ajouterIp }
+
+ajouter_isp:
+    pattern: /ajouterIsp
+    defaults: { _controller: MailBundle:Default:ajouterIsp }
+
+ajouter_domaine:
+    pattern: /ajouterDomaine
+    defaults: { _controller: MailBundle:Default:ajouterDomaine }
+
+ajouter_data:
+    pattern: /ajouterData
+    defaults: { _controller: MailBundle:Default:ajouterData }
+
+ajouter_bounce:
+    pattern: /ajouterBounce
+    defaults: { _controller: MailBundle:Default:ajouterBounce }
+
+ajouter_unsubs:
+    pattern: /ajouterUnsubs
+    defaults: { _controller: MailBundle:Default:ajouterUnsubs }
+
+ajouter_offre:
+    pattern: /ajouterOffre
+    defaults: { _controller: MailBundle:Default:ajouterOffre }
+
+ajouter_campagne:
+    pattern: /ajouterCampagne
+    defaults: { _controller: MailBundle:Default:ajouterCampagne }
+
+afficher_offres:
+    pattern: /afficherOffres
+    defaults: { _controller: MailBundle:Default:afficherOffres }
+
+afficher_domaines:
+    pattern: /afficherDomaines
+    defaults: { _controller: MailBundle:Default:afficherDomaines }
+
+afficher_ips:
+    pattern: /afficherIps
+    defaults: { _controller: MailBundle:Default:afficherIps }
+
+afficher_isps:
+    pattern: /afficherIsps
+    defaults: { _controller: MailBundle:Default:afficherIsps }
+
+afficher_datas:
+    pattern: /afficherDatas
+    defaults: { _controller: MailBundle:Default:afficherDatas }
+
+
+afficher_campagnes:
+    pattern: /afficherCampagnes
+    defaults: { _controller: MailBundle:Default:afficherCampagnes }
+
+modifier_campagne:
+    pattern: /modifierCampagne/{id}
+    defaults: { _controller: MailBundle:Default:modifierCampagne }
+    requirements:
+            id: \d+
+
+modifier_offre:
+    pattern: /modifierOffre/{id}
+    defaults: { _controller: MailBundle:Default:modifierOffre }
+    requirements:
+            id: \d+
+
+supprimer_offre:
+    pattern: /supprimerOffre/{id}
+    defaults: { _controller: MailBundle:Default:supprimerOffre }
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+supprimer_domaine:
+    pattern: /supprimerDomaine/{id}
+    defaults: { _controller: MailBundle:Default:supprimerDomaine }
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+supprimer_ip:
+    pattern: /supprimerIp/{id}
+    defaults: { _controller: MailBundle:Default:supprimerIp }
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+supprimer_isp:
+    pattern: /supprimerIsp/{id}
+    defaults: { _controller: MailBundle:Default:supprimerIsp }
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+supprimer_data:
+    pattern: /supprimerData/{id}
+    defaults: { _controller: MailBundle:Default:supprimerData }
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+supprimer_campagne:
+    pattern: /supprimerCampagne/{id}
+    defaults: { _controller: MailBundle:Default:supprimerCampagne }
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+etat_offre:
+    pattern: /etatOffre/{id}
+    defaults: { _controller: MailBundle:Default:etatOffre }
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+etat_domaine:
+    pattern: /etatDomaine/{id}
+    defaults: { _controller: MailBundle:Default:etatDomaine }
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+afficher_campagne:
+    pattern: /afficherCampagne/{id}
+    defaults: { _controller: MailBundle:Default:afficherCampagne }
+    requirements:
+            id: \d+
+
+sending:
+    pattern: /Sending/{id}/{type}
+    defaults: { _controller: MailBundle:Default:sending }
+    requirements:
+            id: \d+
+            type: \d+
+    options:
+            expose: true
+
+tracking:
+    pattern: /Tracking/{type}/{id}
+    defaults: { _controller: MailBundle:Default:tracking }
+    requirements:
+            type: \d+
+            id: \d+
+
+numSend:
+    pattern: /numSend/{id}
+    defaults: { _controller: MailBundle:Default:numSend }
+    requirements:
+            id: \d+
+    options:
+            expose: true
+
+stop_send:
+    pattern: /stopSend/{id}
+    defaults: { _controller: MailBundle:Default:stopSend }
+    requirements:
+            id: \d+
+    options:
+            expose: true
+
+test_campagne:
+    pattern: /testCampagne/{id}
+    defaults: { _controller: MailBundle:Default:testCampagne }
+    requirements:
+            id: \d+
+
+send_campagne:
+    pattern: /sendCampagne/{id}
+    defaults: { _controller: MailBundle:Default:sendCampagne }
+    requirements:
+            id: \d+
+    options:
+            expose: true

@@ -1,0 +1,23 @@
+{% extends "::base.html.twig" %}
+
+{% block mainContent %}
+
+    <span class="contentBody">
+        {% for campagne in campagnes %}
+
+            <span class="spanParent">
+
+
+            <span class="nomElement">{{ campagne.nomCampagne }}</span>
+            <a href="{{ path("modifier_campagne", {id: campagne.id}) }}" class="actionElement">Modifier</a>
+            <a class="supprimerCampagne" id="{{ campagne.id }}" href="javascript:;">Supprimer</a>
+            <a href="{{ path("afficher_campagne", {id: campagne.id}) }}" class="actionElement">Afficher</a>
+
+
+        </span>
+
+
+        {% endfor %}
+    </span>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "::base.html.twig" %}
+
+{% block mainContent %}
+
+    <span class="contentBody">
+        {% for domaine in domaines %}
+
+            <span class="spanParent">
+
+
+            <span class="nomElement">{{ domaine.domaine }}</span>
+            <a class="supprimerDomaine" id="{{ domaine.id }}" href="javascript:;">Supprimer</a>
+
+                {% if domaine.etat == true %}
+                    <a class="etatElement" id="{{ domaine.id }}" href="javascript:;">Desactiver</a>
+            {% else %}
+                    <a class="etatElement" id="{{ domaine.id }}" href="javascript:;" style="color: #ff0000;">Activer</a>
+                {% endif %}
+
+
+            </span>
+
+
+        {% endfor %}
+    </span>
+
+{% endblock %}
