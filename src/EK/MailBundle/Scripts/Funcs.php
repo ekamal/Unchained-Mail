@@ -2,19 +2,52 @@
 
 //date_default_timezone_set('Etc/UTC');
 require 'PHPMailer/PHPMailerAutoload.php';
+require 'Database.php';
 
-function verifyPause($chemin, $j, $id)
+function infoCampagne($id, $db) {
+
+
+    $mysqli = $db->getConnection();
+    $sql_query = "SELECT * FROM campagne WHERE id=".$id."";
+    $result = $mysqli->query($sql_query);
+    $row = $result->fetch_assoc();
+
+    $infoTab[0] = $row['limite'];
+    $infoTab[1] = $row['waiting'];
+
+
+    return $infoTab;
+}
+
+function getTabIps($ipsTemp) {
+
+    $i=0;
+    $ips=array();
+    foreach($ipsTemp as $ip)
+    {
+        $line = explode(',', $ip);
+        $ips[$i][0]=$line[0];
+        $ips[$i][1]=$line[1];
+        $ips[$i][2]=$line[2];
+        $ips[$i][3]=$line[3];
+        $i=$i+1;
+    }
+
+    return $ips;
+}
+
+
+function verifyPause($chemin, $j, $id, $db)
 {
     $pauseFile = fopen($chemin."pause.txt", 'r');
     $pause = fgets($pauseFile);
     if($pause=="1")
     {
-        $conn = new mysqli('localhost', 'root', '', 'ekmail');
+        $mysqli = $db->getConnection();
         $sql = "UPDATE campagne SET numSent=numSent+".$j." WHERE id=".$id."";
-        $result = $conn->query($sql);
+        $result = $mysqli->query($sql);
         $sql = "UPDATE campagne SET numNoSent=numNoSent-".$j." WHERE id=".$id."";
-        $result = $conn->query($sql);
-        $conn->close();
+        $result = $mysqli->query($sql);
         return true;
     }
     fclose($pauseFile);
@@ -39,16 +72,15 @@ function majNumSent($chemin, $j)
 
 
 
-function getMail($id, $chemin) {
+function getMail($id, $chemin, $db) {
 
-    $conn = new mysqli('localhost', 'root', '', 'ekmail');
+    $mysqli = $db->getConnection();
     $sql = "SELECT * FROM campagne WHERE id=".$id."";
-    $result = $conn->query($sql);
+    $result = $mysqli->query($sql);
     $row = $result->fetch_assoc();
     $sql2 = "SELECT * FROM domaine WHERE id=".$row['domaine_id']."";
-    $result2 = $conn->query($sql2);
+    $result2 = $mysqli->query($sql2);
     $row2 = $result2->fetch_assoc();
-    $conn->close();
 
     $mail = new PHPMailer;
     $mail->isSMTP();

@@ -378,6 +378,11 @@ class DefaultController extends Controller
             fwrite($file, "1"."\n");
             fclose($file);
 
+            $fileLog = $chemin."/log.txt";
+            $file = fopen($fileLog,"a");
+            fwrite($file, "Campagne Created at : ".date('l jS \of F Y h:i:s A')."\n");
+            fclose($file);
+
             $fileIps = $chemin."/ips.txt";
             $file = fopen($fileIps,"a");
                 foreach($campagne->getIps() as $ip)
@@ -1136,7 +1141,7 @@ class DefaultController extends Controller
         file_put_contents($chemin, "0");
 
         chdir('C:\wamp\www\Symfony-Projects\Unchained-Mail\src\EK\MailBundle\Scripts');
-        $cmd = "php -q send2.php ".$campagne->getId()."";
+        $cmd = "php -q send.php ".$campagne->getId()."";
 
 
         if(substr(php_uname(), 0, 7) == "Windows"){
