@@ -1135,7 +1135,7 @@ class DefaultController extends Controller
         $chemin = $chemin.$campagne->getId()."/pause.txt";
         file_put_contents($chemin, "0");
 
-        chdir('C:\wamp\www\UnchainedMail\src\EK\MailBundle\Scripts');
+        chdir('C:\wamp\www\Symfony-Projects\Unchained-Mail\src\EK\MailBundle\Scripts');
         $cmd = "php -q send2.php ".$campagne->getId()."";
 
 
