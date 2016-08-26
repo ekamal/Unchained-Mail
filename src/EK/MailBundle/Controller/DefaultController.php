@@ -1204,17 +1204,15 @@ class DefaultController extends Controller
 
             $em->flush();
 
-                /*chdir('C:\wamp\www\UnchainedMail\src\EK\MailBundle\Scripts');
-                $cmd = "php -q send.php ".$campagne->getId()."";
+            chdir('C:\wamp\www\Symfony-Projects\Unchained-Mail\src\EK\MailBundle\Scripts');
+            $cmd = "php -q test.php ".$campagne->getId()."";
 
 
-                if(substr(php_uname(), 0, 7) == "Windows"){
-                    pclose(popen("start /B ". $cmd, "r"));
-                }else {
-                    exec($cmd . " > /dev/null &");
-                }*/
-
-                //return $this->render('MailBundle:Default:send.html.twig', array('campagne' => $campagne));
+            if(substr(php_uname(), 0, 7) == "Windows"){
+                pclose(popen("start /B ". $cmd, "r"));
+            }else {
+                exec($cmd . " > /dev/null &");
+            }
 
             return $this->redirect($this->generateUrl('afficher_campagne', array('id' => $campagne->getId())));
 

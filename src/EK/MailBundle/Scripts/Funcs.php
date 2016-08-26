@@ -19,6 +19,19 @@ function infoCampagne($id, $db) {
     return $infoTab;
 }
 
+function getEmailTest($id, $db) {
+
+
+    $mysqli = $db->getConnection();
+    $sql_query = "SELECT * FROM campagne WHERE id=".$id."";
+    $result = $mysqli->query($sql_query);
+    $row = $result->fetch_assoc();
+
+    $emailTest = $row['emailTest'];
+
+    return $emailTest;
+}
+
 function getTabIps($ipsTemp) {
 
     $i=0;

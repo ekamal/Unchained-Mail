@@ -62,7 +62,7 @@ if (isset($argv[1])) {
 
 
 
-    fwrite($file,"FIN de lancement ....");
+    fwrite($file,"FIN de lancement ...."."\n");
     file_put_contents($chemin."emails.txt", implode("\r\n", $emails));
     file_put_contents($chemin."pause.txt", "1");
     verifyPause($chemin, $j, $argv[1], $db);

@@ -52,13 +52,13 @@ class CampagneSendType extends AbstractType
             ->add('html',"textarea", array(
                 'label' => 'Html'
             ))
-            ->add('datas' , 'entity', array(
+            /*->add('datas' , 'entity', array(
                     'label'    => 'Data' ,
                     'attr' => array('class' => 'multiSelect'),
                     'class'    => 'MailBundle:Data',
                     'property' => 'nomData',
                     'multiple' => true)
-            )
+            )*/
             /*->add('offre' , 'entity', array(
                     'label'    => 'Offre' ,
                     'class'    => 'MailBundle:Offre',
