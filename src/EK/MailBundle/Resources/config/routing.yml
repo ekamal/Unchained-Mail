@@ -186,3 +186,15 @@ send_campagne:
             id: \d+
     options:
             expose: true
+
+afficher_queue:
+    pattern: /afficherQueue/{id}
+    defaults: { _controller: MailBundle:Default:afficherQueue }
+    requirements:
+                id: \d+
+
+queue_solo:
+    pattern: /queueSolo/{ip}
+    defaults: { _controller: MailBundle:Default:queueSolo }
+    options:
+                expose: true

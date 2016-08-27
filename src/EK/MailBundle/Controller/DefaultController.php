@@ -1238,5 +1238,77 @@ class DefaultController extends Controller
 
 
 
+    //******************************* Fonction AFFICHER QUEUE *******************************//
+
+    function afficherQueueAction(Request $request, Campagne $campagne) {
+
+        $ips=array();
+        foreach($campagne->getIps() as $ip) {
+
+            $i = $ip->getIp();
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "http://".$i.":5771/deferred.php");
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_USERPWD, "kira:speedy15$");
+            curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+
+            $output = curl_exec($ch);
+            curl_close($ch);
+
+            $ips[$i] = intval($output);
+        }
+
+
+
+
+        return $this->render('MailBundle:Default:queue.html.twig', array(
+            'ips' => $ips));
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    //******************************* Fonction QUEUE SOLO *******************************//
+
+    function queueSoloAction($ip) {
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "http://".$ip.":5771/deferred.php");
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERPWD, "kira:speedy15$");
+        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+
+        $json = json_encode(array('value' =>  intval($output)));
+        $response = new Response($json);
+        return $response;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

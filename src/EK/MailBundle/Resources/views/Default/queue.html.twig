@@ -1,0 +1,18 @@
+{% extends "::base.html.twig" %}
+{% block js %}
+    {{ parent() }}
+    <script type='text/javascript' src="{{ asset('js/queue.js') }}"></script>
+{% endblock %}
+
+{% block mainContent %}
+
+
+    {% for ip,value in ips %}
+
+        <span class="spanParent">
+            <span class="nomElement">{{ ip }}</span> : <span id="1-{{ ip }}" class="nomElement">{{ value }}</span>
+            <a class="actualiser" id="{{ ip }}" href="javascript:;">Actualiser</a>
+        </span>
+    {% endfor %}
+
+{% endblock %}
