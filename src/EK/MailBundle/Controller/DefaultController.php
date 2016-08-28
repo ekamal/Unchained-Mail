@@ -7,6 +7,7 @@ use EK\MailBundle\Entity\Campagne;
 use EK\MailBundle\Entity\Data;
 use EK\MailBundle\Entity\Domaine;
 use EK\MailBundle\Entity\Email;
+use EK\MailBundle\Entity\GlobalTest;
 use EK\MailBundle\Entity\Ip;
 use EK\MailBundle\Entity\Isp;
 use EK\MailBundle\Entity\Offre;
@@ -15,6 +16,7 @@ use EK\MailBundle\Form\CampagneType;
 use EK\MailBundle\Form\CampagneSendType;
 use EK\MailBundle\Form\DataType;
 use EK\MailBundle\Form\DomaineType;
+use EK\MailBundle\Form\GlobalTestType;
 use EK\MailBundle\Form\IpType;
 use EK\MailBundle\Form\IspType;
 use EK\MailBundle\Form\OffreType;
@@ -401,6 +403,72 @@ class DefaultController extends Controller
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+    //******************************* Fonction AJOUTER GLOBAL TEST *******************************//
+
+    function ajouterGlobalTestAction(Request $request) {
+
+        $global = new GlobalTest();
+        $form = $this->createForm( new GlobalTestType(), $global);
+        $form->handleRequest($request);
+
+
+        if($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $global->setDate(new \DateTime());
+            $em->persist($global);
+            $em->flush();
+
+
+
+
+            $chemin = $this->container->get('kernel')->getRootdir().'/../web/globalTest/';
+            $chemin = $chemin.$global->getId();
+            mkdir($chemin);
+
+            $fileEmails = $chemin."/emails.txt";
+            $file = fopen($fileEmails,"a");
+
+            $emails = explode(PHP_EOL, $global->getEmails());
+
+                foreach($emails as $email)
+                {
+                    fwrite($file,$email."\n");
+                }
+
+            fclose($file);
+
+
+            $fileIps = $chemin."/ips.txt";
+            $file = fopen($fileIps,"a");
+            foreach($global->getIps() as $ip)
+            {
+                fwrite($file, $ip->getIp().",".$ip->getHost().",".$ip->getUsername().",".$ip->getPassword()."\n");
+            }
+            fclose($file);
+
+
+            return $this->redirect($this->generateUrl("index"));
+        }
+
+        return $this->render('MailBundle:Default:ajouter.html.twig', array(
+            'form' => $form->createView() ,
+        ));
+
+
+    }
+
+
 
 
 

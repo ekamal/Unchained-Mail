@@ -1,0 +1,5 @@
+5.4.3.2,mail.hostname.com,user1,pass1
+46.101.241.164,mail.server.com,kira,speedy15$
+46.101.252.163,mail.server.com,kira,speedy15$
+46.101.105.50,mail.server.com,kira,speedy15$
+46.101.99.52,mail.server.com,kira,speedy15$

@@ -34,6 +34,10 @@ ajouter_campagne:
     pattern: /ajouterCampagne
     defaults: { _controller: MailBundle:Default:ajouterCampagne }
 
+ajouter_globalTest:
+    pattern: /ajouterGlobalTest
+    defaults: { _controller: MailBundle:Default:ajouterGlobalTest }
+
 afficher_offres:
     pattern: /afficherOffres
     defaults: { _controller: MailBundle:Default:afficherOffres }

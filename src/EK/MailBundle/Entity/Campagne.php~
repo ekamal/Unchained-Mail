@@ -682,4 +682,52 @@ class Campagne
     {
         return $this->pause;
     }
+
+    /**
+     * Set limite
+     *
+     * @param integer $limite
+     *
+     * @return Campagne
+     */
+    public function setLimite($limite)
+    {
+        $this->limite = $limite;
+
+        return $this;
+    }
+
+    /**
+     * Get limite
+     *
+     * @return integer
+     */
+    public function getLimite()
+    {
+        return $this->limite;
+    }
+
+    /**
+     * Set waiting
+     *
+     * @param integer $waiting
+     *
+     * @return Campagne
+     */
+    public function setWaiting($waiting)
+    {
+        $this->waiting = $waiting;
+
+        return $this;
+    }
+
+    /**
+     * Get waiting
+     *
+     * @return integer
+     */
+    public function getWaiting()
+    {
+        return $this->waiting;
+    }
 }
