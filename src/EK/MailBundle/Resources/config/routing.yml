@@ -63,6 +63,10 @@ afficher_campagnes:
     pattern: /afficherCampagnes
     defaults: { _controller: MailBundle:Default:afficherCampagnes }
 
+afficher_testGlobals:
+    pattern: /afficherTestGlobals
+    defaults: { _controller: MailBundle:Default:afficherTestGlobals }
+
 modifier_campagne:
     pattern: /modifierCampagne/{id}
     defaults: { _controller: MailBundle:Default:modifierCampagne }
@@ -123,6 +127,14 @@ supprimer_campagne:
     options:
         expose: true
 
+supprimer_testGlobal:
+    pattern: /supprimerTestGlobal/{id}
+    defaults: { _controller: MailBundle:Default:supprimerTestGlobal }
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
 etat_offre:
     pattern: /etatOffre/{id}
     defaults: { _controller: MailBundle:Default:etatOffre }
@@ -142,6 +154,12 @@ etat_domaine:
 afficher_campagne:
     pattern: /afficherCampagne/{id}
     defaults: { _controller: MailBundle:Default:afficherCampagne }
+    requirements:
+            id: \d+
+
+afficher_globalTest:
+    pattern: /afficherGlobalTest/{id}
+    defaults: { _controller: MailBundle:Default:afficherGlobalTest }
     requirements:
             id: \d+
 

@@ -17,6 +17,7 @@ use EK\MailBundle\Form\CampagneSendType;
 use EK\MailBundle\Form\DataType;
 use EK\MailBundle\Form\DomaineType;
 use EK\MailBundle\Form\GlobalTestType;
+use EK\MailBundle\Form\GlobalTestSendType;
 use EK\MailBundle\Form\IpType;
 use EK\MailBundle\Form\IspType;
 use EK\MailBundle\Form\OffreType;
@@ -593,6 +594,26 @@ class DefaultController extends Controller
 
 
 
+
+    //******************************* Fonction AFFICHER TEST GLOBALS *******************************//
+
+
+
+    function afficherTestGlobalsAction(Request $request) {
+
+        $em = $this->getDoctrine()->getManager();
+        $globals = $em->getRepository('MailBundle:GlobalTest')->findAll();
+
+        return $this->render('MailBundle:Default:afficherTestGlobals.html.twig', array(
+            'globals' => $globals ,
+        ));
+
+
+    }
+
+
+
+
     //******************************* Fonction MODIFIER OFFRE *******************************//
 
     function modifierOffreAction(Request $request, Offre $offre) {
@@ -775,6 +796,37 @@ class DefaultController extends Controller
 
 
 
+    //******************************* Fonction SUPPRIMER TEST GLOBAL *******************************//
+
+    function supprimerTestGlobalAction(Request $request, GlobalTest $global) {
+
+
+
+        $chemin = $this->container->get('kernel')->getRootdir().'/../web/globalTest/';
+        $chemin = $chemin.$global->getId();
+        $cheminEmails = $chemin."/emails.txt";
+        $cheminIps = $chemin."/ips.txt";
+        unlink($cheminEmails);
+        unlink($cheminIps);
+        rmdir($chemin);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($global);
+        $em->flush();
+
+
+
+        $json = json_encode(array('id' => $global->getId()));
+        $response = new Response($json);
+        return $response;
+
+    }
+
+
+
+
+
+
 
     //******************************* Fonction ETAT OFFRE *******************************//
 
@@ -885,6 +937,66 @@ class DefaultController extends Controller
 
     }
 
+
+
+
+    //******************************* Fonction AFFICHER TEST GLOBAL *******************************//
+
+    function afficherGlobalTestAction(Request $request, GlobalTest $global) {
+
+        $form = $this->createForm( new GlobalTestSendType(), $global);
+        $form->handleRequest($request);
+        if($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+
+            $chemin = $this->container->get('kernel')->getRootdir().'/../web/globalTest/';
+            $chemin = $chemin.$global->getId();
+            $fileIps = $chemin."/ips.txt";
+            $fileEmails = $chemin."/emails.txt";
+            $file = fopen($fileIps,"w+");
+
+            foreach($global->getIps() as $ip)
+            {
+                fwrite($file, $ip->getIp().",".$ip->getHost().",".$ip->getUsername().",".$ip->getPassword()."\n");
+            }
+            fclose($file);
+
+
+            $file = fopen($fileEmails,"w+");
+            $emails = explode(PHP_EOL, $global->getEmails());
+
+            foreach($emails as $email)
+            {
+                fwrite($file,$email."\n");
+            }
+
+            fclose($file);
+
+
+            $em->flush();
+
+            chdir('C:\wamp\www\Symfony-Projects\Unchained-Mail\src\EK\MailBundle\Scripts');
+            $cmd = "php -q globalTest.php ".$global->getId()."";
+
+
+            if(substr(php_uname(), 0, 7) == "Windows"){
+                pclose(popen("start /B ". $cmd, "r"));
+            }else {
+                exec($cmd . " > /dev/null &");
+            }
+
+            return $this->redirect($this->generateUrl('afficher_testGlobals'));
+
+
+
+        }
+        return $this->render('MailBundle:Default:testGlobal.html.twig', array(
+            'form' => $form->createView() ,
+            'nomTestGlobal' => $global->getNomTestGlobal(),
+        ));
+
+    }
 
 
 

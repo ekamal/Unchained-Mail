@@ -1,0 +1,26 @@
+{% extends "::base.html.twig" %}
+{% block js %}
+    {{ parent() }}
+    <script type='text/javascript' src="{{ asset('js/testGlobal.js') }}"></script>
+{% endblock %}
+
+{% block mainContent %}
+
+    <span class="contentBody">
+        {% for global in globals %}
+
+            <span class="spanParent">
+
+
+            <span class="nomElement">{{ global.nomTestGlobal }}</span>
+            <a class="supprimerGlobalTest" id="{{ global.id }}" href="javascript:;">Supprimer</a>
+            <a href="{{ path("afficher_globalTest", {id: global.id}) }}" class="actionElement">Afficher</a>
+
+
+        </span>
+
+
+        {% endfor %}
+    </span>
+
+{% endblock %}

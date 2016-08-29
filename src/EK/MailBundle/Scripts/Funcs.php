@@ -19,6 +19,23 @@ function infoCampagne($id, $db) {
     return $infoTab;
 }
 
+function infoGlobalTest($id, $db) {
+
+
+    $mysqli = $db->getConnection();
+    $sql_query = "SELECT * FROM global_test WHERE id=".$id."";
+    $result = $mysqli->query($sql_query);
+    $row = $result->fetch_assoc();
+
+    $infoTab[1] = $row['waiting'];
+
+    $waiting = $row['waiting'];
+
+    return $waiting;
+}
+
+
+
 function getEmailTest($id, $db) {
 
 
@@ -112,6 +129,113 @@ function getMail($id, $chemin, $db) {
     $html = str_replace("__creative",$creative,$html);
     $html = str_replace("__lien",$lien,$html);
     $html = str_replace("__unsub",$unsub,$html);
+
+    foreach ($headers  as  $header) {
+
+        $pos = strpos($header, ":");
+        $part1 = substr($header, 0, $pos);
+        $part2 = substr($header, $pos+1);
+        $part2 = trim($part2);
+
+
+        switch ($part1) {
+            case "FN":
+                $mail->FromName = $part2;
+                break;
+            case "FE":
+                $mail->From = $part2;
+                break;
+            case "SU":
+                $mail->Subject = $part2;
+                break;
+            case "RT":
+                $mail->AddReplyTo($part2);
+                break;
+            case "RP":
+                $mail->Sender = $part2;
+                break;
+            case "MID":
+                $part2 = str_replace("<","",$part2); $part2 =str_replace(">","",$part2);  $mail->MessageID = "<".$part2.">";
+                break;
+            default:
+                $mail->addCustomHeader($header);
+
+        }
+
+    }
+
+
+    switch ($row['encoding']) {
+        case 1:
+            $mail->Encoding = '8bit';
+            break;
+        case 2:
+            $mail->Encoding = 'base64';
+            break;
+        case 3:
+            $mail->Encoding = 'quoted-printable';
+            break;
+        case 4:
+            $mail->Encoding = '7bit';
+            break;
+    }
+
+
+    switch ($row['typeContent']) {
+        case 1:
+            $mail->Body = $html;
+            $mail->IsHTML(true);
+            break;
+        case 2:
+            $mail->Body = $html;
+            break;
+        case 3:
+            $mail->msgHTML($html);
+            break;
+    }
+
+
+
+    switch ($row['charset']) {
+        case 1:
+            $mail->CharSet = "utf-8";
+            break;
+        case 2:
+            $mail->CharSet = "us-ascii";
+            break;
+        case 3:
+            $mail->CharSet = "iso-8859-1";
+            break;
+    }
+
+
+    return $mail;
+}
+
+
+
+
+
+
+function getMailTestGlobal($id, $db) {
+
+    $mysqli = $db->getConnection();
+    $sql = "SELECT * FROM global_test WHERE id=".$id."";
+    $result = $mysqli->query($sql);
+    $row = $result->fetch_assoc();
+    /*$sql2 = "SELECT * FROM domaine WHERE id=".$row['domaine_id']."";
+    $result2 = $mysqli->query($sql2);
+    $row2 = $result2->fetch_assoc();*/
+
+    $mail = new PHPMailer;
+    $mail->isSMTP();
+    $mail->SMTPAuth = true;
+    $mail->Port = 587;
+    $mail->SMTPSecure = 'tls';
+
+    $html = $row['html'];
+    $headers =  explode("\n", $row['header']);
+
 
     foreach ($headers  as  $header) {
 

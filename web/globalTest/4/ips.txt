@@ -1,0 +1,5 @@
+10.0.0.0,host1,user11,pass11
+5.4.3.2,mail.hostname.com,user1,pass1
+139.59.155.41,mail.server1.com,kira,speedy15$
+139.59.138.224,mail.server2.com,kira,speedy15$
+139.59.211.0,mail.server.com,kira,speedy15$
