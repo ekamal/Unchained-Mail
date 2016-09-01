@@ -23,7 +23,10 @@ if (isset($argv[1])) {
     $j=0;
     $limit = $infoCampagne[0];
     $waiting = $infoCampagne[1];
+    $tracking = $infoCampagne[2];
+    $html = $mail->Body;
     $total = count($emails);
+
 
     while(!empty($emails)) {
 
@@ -42,15 +45,23 @@ if (isset($argv[1])) {
         $tmpLimit = 0;
         for($k=0; $k<$limit; $k++) {
             $tmpLimit++;
-            $mail->AddAddress(trim($emails[$j]));
-            fwrite($file,"lanser ".$emails[$j]." avec ".$ips[$i][0]." a ".date("H:i:s")."\n");
+            $email = explode(',', $emails[$j]); // new line
+
+            if($tracking) {
+                $mail = getTrackHtml($mail, $email[1], $html);
+            }
+
+            $mail->AddAddress(trim($email[0]));
+            fwrite($file,"lanser ".$email[0]." avec ".$ips[$i][0]." a ".date("H:i:s")."\n");
+            //fwrite($file,"lanser ".$mail->Body."\n\n\n");
             unset($emails[$j++]);
+            /*if($mail->send()) {fwrite($file,"lancement ok .... "."\n"); }
+            else {fwrite($file,"KO : ".$mail->ErrorInfo."\n");}*/
+            $mail->ClearAddresses();
             if($j==$total) { break;}
 
         }
-        /*if($mail->send()) {fwrite($file,"lancement ok .... "."\n"); }
-        else {fwrite($file,"KO : ".$mail->ErrorInfo."\n");}*/
-        $mail->ClearAddresses();
+
         majNumSent($chemin, $tmpLimit);
         usleep($waiting);
         $i++;

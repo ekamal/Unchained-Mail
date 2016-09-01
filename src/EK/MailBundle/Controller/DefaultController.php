@@ -334,6 +334,8 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
 
+
+
         if($form->isValid()) {
             $numEmails = 0;
             $em = $this->getDoctrine()->getManager();
@@ -347,6 +349,15 @@ class DefaultController extends Controller
             $em->persist($campagne);
             $em->flush();
 
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "http://newofferz4u.com/addCamp.php?id=".$campagne->getId()."");
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            $output = curl_exec($ch);
+            curl_close($ch);
+
             $chemin = $this->container->get('kernel')->getRootdir().'/../web/logs/';
             $chemin = $chemin.$campagne->getId();
             mkdir($chemin);
@@ -358,7 +369,7 @@ class DefaultController extends Controller
             {
                 foreach($campagne->getDatas()[$i]->getEmails() as $email)
                 {
-                    fwrite($file, $email->getEmail()."\n");
+                    fwrite($file, $email->getEmail().",".$email->getId()."\n");
                     $numEmails = $numEmails +1;
                 }
             }

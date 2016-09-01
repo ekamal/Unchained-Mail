@@ -14,6 +14,7 @@ function infoCampagne($id, $db) {
 
     $infoTab[0] = $row['limite'];
     $infoTab[1] = $row['waiting'];
+    $infoTab[2] = $row['tracking'];
 
 
     return $infoTab;
@@ -122,12 +123,12 @@ function getMail($id, $chemin, $db) {
     $html = $row['html'];
     $headers =  explode("\n", $row['header']);
 
-    $creative = "http://".$row2['domaine']."/track.php?id=".$id."&type=1";
-    $lien = "http://".$row2['domaine']."/track.php?id=".$id."&type=2";
-    $unsub = "http://".$row2['domaine']."/track.php?id=".$id."&type=3";
+    $lien = "http://".$row2['domaine']."/track.php?idEmail=0&type=1&idCamp=".$id;
+    $creative = "http://".$row2['domaine']."/track.php?idEmail=0&type=2&idCamp=".$id;
+    $unsub = "http://".$row2['domaine']."/track.php?idEmail=0&type=3&idCamp=".$id;
 
-    $html = str_replace("__creative",$creative,$html);
     $html = str_replace("__lien",$lien,$html);
+    $html = str_replace("__creative",$creative,$html);
     $html = str_replace("__unsub",$unsub,$html);
 
     foreach ($headers  as  $header) {
@@ -212,7 +213,16 @@ function getMail($id, $chemin, $db) {
     return $mail;
 }
 
+function getTrackHtml($mail, $idEmail, $html) {
 
+    $html = str_replace("idEmail=0&type=1","idEmail=".$idEmail."&type=1",$html);
+    $html = str_replace("idEmail=0&type=2","idEmail=".$idEmail."&type=2",$html);
+    $html = str_replace("idEmail=0&type=3","idEmail=".$idEmail."&type=3",$html);
+
+    $mail->Body = $html;
+    return $mail;
+
+}
 
 
 
