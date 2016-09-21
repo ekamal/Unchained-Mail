@@ -1,0 +1,2 @@
+46.101.252.163,mail.server.com,kira,speedy15$
+46.101.99.52,mail.server.com,kira,speedy15$

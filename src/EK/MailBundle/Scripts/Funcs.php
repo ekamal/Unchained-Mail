@@ -113,6 +113,10 @@ function getMail($id, $chemin, $db) {
     $result2 = $mysqli->query($sql2);
     $row2 = $result2->fetch_assoc();
 
+    $sql3 = "SELECT * FROM offre WHERE id=".$row['offre_id']."";
+    $result3 = $mysqli->query($sql3);
+    $row3 = $result3->fetch_assoc();
+
     $mail = new PHPMailer;
     $mail->isSMTP();
     $mail->SMTPAuth = true;
@@ -124,12 +128,15 @@ function getMail($id, $chemin, $db) {
     $headers =  explode("\n", $row['header']);
 
     $lien = "http://".$row2['domaine']."/track.php?idEmail=0&type=1&idCamp=".$id;
-    $creative = "http://".$row2['domaine']."/track.php?idEmail=0&type=2&idCamp=".$id;
+    //$creative = "http://".$row2['domaine']."/track.php?idEmail=0&type=2&idCamp=".$id;
+    $creative = "".$row3['creative']."";
     $unsub = "http://".$row2['domaine']."/track.php?idEmail=0&type=3&idCamp=".$id;
+    $open = "http://".$row2['domaine']."/track.php?idEmail=0&type=2&idCamp=".$id;
 
     $html = str_replace("__lien",$lien,$html);
     $html = str_replace("__creative",$creative,$html);
     $html = str_replace("__unsub",$unsub,$html);
+    $html = str_replace("__open",$open,$html);
 
     foreach ($headers  as  $header) {
 

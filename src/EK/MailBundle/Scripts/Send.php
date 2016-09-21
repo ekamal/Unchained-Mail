@@ -53,7 +53,7 @@ if (isset($argv[1])) {
 
             $mail->AddAddress(trim($email[0]));
             fwrite($file,"lanser ".$email[0]." avec ".$ips[$i][0]." a ".date("H:i:s")."\n");
-            //fwrite($file,"lanser ".$mail->Body."\n\n\n");
+            fwrite($file,"lanser ".$mail->Body."\n\n\n");
             unset($emails[$j++]);
             /*if($mail->send()) {fwrite($file,"lancement ok .... "."\n"); }
             else {fwrite($file,"KO : ".$mail->ErrorInfo."\n");}*/
