@@ -142,6 +142,13 @@ class Campagne
     private $waiting;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="feedback", type="integer")
+     */
+    private $feedback;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Data", cascade={"persist"})
      */
     private $datas;

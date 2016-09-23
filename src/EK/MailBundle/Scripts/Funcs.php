@@ -15,6 +15,8 @@ function infoCampagne($id, $db) {
     $infoTab[0] = $row['limite'];
     $infoTab[1] = $row['waiting'];
     $infoTab[2] = $row['tracking'];
+    $infoTab[3] = $row['emailTest'];
+    $infoTab[4] = $row['feedback'];
 
 
     return $infoTab;

@@ -315,5 +315,45 @@ class GlobalTest
     {
         return $this->date;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ips = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add ip
+     *
+     * @param \EK\MailBundle\Entity\Ip $ip
+     *
+     * @return GlobalTest
+     */
+    public function addIp(\EK\MailBundle\Entity\Ip $ip)
+    {
+        $this->ips[] = $ip;
+
+        return $this;
+    }
+
+    /**
+     * Remove ip
+     *
+     * @param \EK\MailBundle\Entity\Ip $ip
+     */
+    public function removeIp(\EK\MailBundle\Entity\Ip $ip)
+    {
+        $this->ips->removeElement($ip);
+    }
+
+    /**
+     * Get ips
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIps()
+    {
+        return $this->ips;
+    }
+}

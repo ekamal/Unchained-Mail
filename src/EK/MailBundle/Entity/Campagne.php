@@ -142,6 +142,13 @@ class Campagne
     private $waiting;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="feedback", type="integer")
+     */
+    private $feedback;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Data", cascade={"persist"})
      */
     private $datas;
@@ -729,5 +736,29 @@ class Campagne
     public function getWaiting()
     {
         return $this->waiting;
+    }
+
+    /**
+     * Set feedback
+     *
+     * @param integer $feedback
+     *
+     * @return Campagne
+     */
+    public function setFeedback($feedback)
+    {
+        $this->feedback = $feedback;
+
+        return $this;
+    }
+
+    /**
+     * Get feedback
+     *
+     * @return integer
+     */
+    public function getFeedback()
+    {
+        return $this->feedback;
     }
 }

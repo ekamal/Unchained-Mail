@@ -1,2 +1,0 @@
-46.101.241.164,mail.server.com,kira,speedy15$
-46.101.252.163,mail.server.com,kira,speedy15$

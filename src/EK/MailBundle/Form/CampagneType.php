@@ -27,6 +27,9 @@ class CampagneType extends AbstractType
             ->add('waiting', null, array(
                 'label' => 'Waiting'
             ))
+            ->add('feedback', null, array(
+                'label' => 'Feedback'
+            ))
             ->add('tracking', 'choice', array(
                 'label' => 'Tracking',
                 'choices' => array('0' => 'Non' ,
