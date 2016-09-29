@@ -413,7 +413,7 @@ class DefaultController extends Controller
 
             $fileLog = $chemin."/log.txt";
             $file = fopen($fileLog,"a");
-            fwrite($file, "Campagne Created at : ".date('l jS \of F Y h:i:s A')."\n");
+            fwrite($file, "---CAMPAGNE CREATED AT : ".date('l jS \of F Y h:i:s A')."\n");
             fclose($file);
 
             $fileIps = $chemin."/ips.txt";

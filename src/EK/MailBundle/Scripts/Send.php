@@ -29,20 +29,25 @@ if (isset($argv[1])) {
     $html = $mail->Body;
     $total = count($emails);
 
+    fwrite($file,"---SEND STARTED AT ".date("d/m/Y , H:i:s")."\n");
 
     while(!empty($emails)) {
 
+
         if(verifyPause($chemin, $j, $argv[1], $db)) {
-            fwrite($file,"lancement arreter .... "."\n");
+            //fwrite($file,"lancement arreter .... "."\n");
+            fwrite($file,"---SEND STOPPED AT ".date("d/m/Y , H:i:s")."\n");
             file_put_contents($chemin."emails.txt", implode("\r\n", $emails));
+            fclose($file);
             exit;
         }
 
+        if($i == count($ips)) { $i = 0;}
         $mail->Host = $ips[$i][0];
         $mail->Username = $ips[$i][2];
         $mail->Password = $ips[$i][3];
 
-        if($i == count($ips)) { $i = 0;}
+
 
         $tmpLimit = 0;
         for($k=0; $k<$limit; $k++) {
@@ -50,10 +55,11 @@ if (isset($argv[1])) {
             if($j%$feedback==0) {
                 $mail->AddAddress(trim($emailTest));
                 $mail = getTrackHtml($mail, 0, $html);
-                fwrite($file,"lanser ".$emailTest." avec ".$ips[$i][0]." a ".date("H:i:s")."\n");
-                fwrite($file,"lanser ".$mail->Body."\n\n\n");
-                /*if($mail->send()) {fwrite($file,"lancement ok .... "."\n"); }
-                else {fwrite($file,"KO : ".$mail->ErrorInfo."\n");}*/
+                //fwrite($file,"lanser ".$emailTest." avec ".$ips[$i][0]." a ".date("H:i:s")."\n");
+                //fwrite($file,"lanser ".$mail->Body."\n\n\n");
+                //if($mail->send()) {fwrite($file,"lancement ok .... "."\n"); }
+                if($mail->send()) {fwrite($file,"FeedBack ok : ".$emailTest." with ".$ips[$i][0]."\n"); }
+                else {fwrite($file,"Error FeedBack : ".$emailTest." with error : ".$mail->ErrorInfo."\n");}
                 $mail->ClearAddresses();
             }
 
@@ -65,11 +71,12 @@ if (isset($argv[1])) {
             }
 
             $mail->AddAddress(trim($email[0]));
-            fwrite($file,"lanser ".$email[0]." avec ".$ips[$i][0]." a ".date("H:i:s")."\n");
-            fwrite($file,"lanser ".$mail->Body."\n\n\n");
+            //fwrite($file,"lanser ".$email[0]." avec ".$ips[$i][0]." a ".date("H:i:s")."\n");
+            //fwrite($file,"lanser ".$mail->Body."\n\n\n");
             unset($emails[$j++]);
-            /*if($mail->send()) {fwrite($file,"lancement ok .... "."\n"); }
-            else {fwrite($file,"KO : ".$mail->ErrorInfo."\n");}*/
+            //if($mail->send()) {fwrite($file,"lancement ok .... "."\n"); }
+            if($mail->send()) {fwrite($file,"Ok : ".$email[0]." with ".$ips[$i][0]."\n"); }
+            else {fwrite($file,"Error : ".$email[0]." with error : ".$mail->ErrorInfo."\n");}
             $mail->ClearAddresses();
             if($j==$total) { break;}
 
@@ -86,7 +93,8 @@ if (isset($argv[1])) {
 
 
 
-    fwrite($file,"FIN de lancement ...."."\n");
+    //fwrite($file,"FIN de lancement ...."."\n");
+    fwrite($file,"---CAMPAGNE COMPLETED AT ".date("d/m/Y , H:i:s")."\n");
     file_put_contents($chemin."emails.txt", implode("\r\n", $emails));
     file_put_contents($chemin."pause.txt", "1");
     verifyPause($chemin, $j, $argv[1], $db);

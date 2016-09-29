@@ -22,10 +22,10 @@ if (isset($argv[1])) {
 
     $mail->AddAddress(trim($emailTest));
 
-    fwrite($file,"Test Campagne : ".$emailTest." avec ".$ip[0]." a ".date("H:i:s")." Subject : ".$mail->Subject."\n");
+    //fwrite($file,"Test Campagne : ".$emailTest." avec ".$ip[0]." a ".date("H:i:s")." Subject : ".$mail->Subject."\n");
 
-    /*if($mail->send()) {fwrite($file,"test campagne ok .... "."\n"); }
-        else {fwrite($file,"KO test campagne : ".$mail->ErrorInfo."\n");}*/
+    if($mail->send()) {fwrite($file,"---CAMPAGNE TEST : ".$emailTest." with ".$ip[0]." AT ".date("d/m/Y , H:i:s")."\n"); }
+        else {fwrite($file,"---ERROR TEST : ".$emailTest." with error ".$mail->ErrorInfo."\n");}
 
     fclose($file);
 

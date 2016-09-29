@@ -1,0 +1,22 @@
+Campagne Created at : Tuesday 27th of September 2016 05:54:08 PM
+lanser daniel.torro71@gmail.com avec 138.68.80.145 a 15:54:24
+Email1 daniel.torro71@gmail.com
+lanser daniel.torro71@gmail.com avec 138.68.80.145 a 15:54:24
+j =  1 and total =  6
+Email1 ekamal.corps@gmail.com
+lanser ekamal.corps@gmail.com avec 138.68.80.145 a 15:54:24
+j =  2 and total =  6
+Email1 elmorabetkamal@gmail.com
+lanser elmorabetkamal@gmail.com avec 46.101.232.10 a 15:54:24
+j =  3 and total =  6
+lanser daniel.torro71@gmail.com avec 46.101.232.10 a 15:54:24
+Email1 sportdirectv@gmail.com
+lanser sportdirectv@gmail.com avec 46.101.232.10 a 15:54:24
+j =  4 and total =  6
+Email1 sportsdirectv@gmail.com
+lanser sportsdirectv@gmail.com avec 138.68.80.145 a 15:54:25
+j =  5 and total =  6
+Email1 kamal.flag@gmail.com
+lanser kamal.flag@gmail.com avec 138.68.80.145 a 15:54:25
+j =  6 and total =  6
+FIN de lancement ....
